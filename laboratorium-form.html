@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Laboratorium WTP Subang Larang</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .form-section {
+            padding: 30px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1976d2;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #1976d2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .parameter-group {
+            background: #ffffff;
+            border: 2px solid #e3f2fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .parameter-header {
+            background: #1976d2;
+            color: white;
+            padding: 12px 20px;
+            margin: -20px -20px 20px -20px;
+            border-radius: 6px 6px 0 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: 200px repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .time-grid.header {
+            font-weight: 600;
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .param-name {
+            font-weight: 500;
+            color: #333;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .param-unit {
+            color: #666;
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        .time-input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 13px;
+            width: 100%;
+        }
+
+        .time-input:focus {
+            border-color: #1976d2;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+        }
+
+        .time-header {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1976d2;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #1976d2;
+            border: 2px solid #1976d2;
+        }
+
+        .btn-secondary:hover {
+            background: #1976d2;
+            color: white;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #1976d2;
+            font-weight: 600;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .standard-range {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .time-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        .collapsible {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .collapsible::before {
+            content: '▼ ';
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .collapsible.collapsed::before {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 Laporan Harian Laboratorium WTP Subang Larang</h1>
+            <p>Pemantauan Kualitas Air Baku dan Air Bersih</p>
+        </div>
+
+        <div class="form-section">
+            <div id="alertBox" class="alert"></div>
+
+            <!-- INFO DASAR -->
+            <div class="info-grid">
+                <div class="form-group">
+                    <label>📅 Hari</label>
+                    <select id="hari" required>
+                        <option value="">Pilih Hari</option>
+                        <option value="Senin">Senin</option>
+                        <option value="Selasa">Selasa</option>
+                        <option value="Rabu">Rabu</option>
+                        <option value="Kamis">Kamis</option>
+                        <option value="Jumat">Jumat</option>
+                        <option value="Sabtu">Sabtu</option>
+                        <option value="Minggu">Minggu</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>📆 Tanggal</label>
+                    <input type="date" id="tanggal" required>
+                </div>
+
+                <div class="form-group">
+                    <label>👤 Petugas Laboratorium</label>
+                    <input type="text" id="petugas" placeholder="Nama petugas" required>
+                </div>
+
+                <div class="form-group">
+                    <label>📄 Halaman</label>
+                    <input type="text" id="halaman" value="Page 1 of 1" readonly>
+                </div>
+            </div>
+
+            <!-- PILIH WAKTU PEMANTAUAN -->
+            <div class="section-title collapsible" onclick="toggleSection('timeSelection')">
+                ⏰ Pilih Waktu Pemantauan
+            </div>
+            <div id="timeSelection" class="collapsible-content">
+                <div class="parameter-group">
+                    <p style="margin-bottom: 15px; color: #666;">Centang waktu yang akan digunakan untuk pemantauan:</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px;">
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="08:00"> 08:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="09:00"> 09:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="10:00"> 10:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="11:00"> 11:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="12:00"> 12:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="13:00"> 13:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="14:00"> 14:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="15:00"> 15:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="16:00"> 16:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="17:00"> 17:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="18:00"> 18:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="19:00"> 19:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="20:00"> 20:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="21:00"> 21:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="22:00"> 22:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="23:00"> 23:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="00:00"> 00:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="01:00"> 01:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="02:00"> 02:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="03:00"> 03:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="04:00"> 04:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="05:00"> 05:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="06:00"> 06:00
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" class="time-checkbox" value="07:00"> 07:00
+                        </label>
+                    </div>
+                    <button onclick="selectAllTimes()" style="margin-top: 15px; padding: 8px 20px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        ✓ Pilih Semua Waktu
+                    </button>
+                </div>
+            </div>
+
+            <!-- KEKERUHAN -->
+            <div class="section-title collapsible" onclick="toggleSection('kekeruhan')">
+                💧 Kekeruhan
+            </div>
+            <div id="kekeruhan" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">Kekeruhan (NTU)</div>
+                    <div id="kekeruhanGrid"></div>
+                </div>
+            </div>
+
+            <!-- pH -->
+            <div class="section-title collapsible" onclick="toggleSection('ph')">
+                ⚗️ pH
+            </div>
+            <div id="ph" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">pH <span class="standard-range">Standar: 6.5 - 8.5</span></div>
+                    <div id="phGrid"></div>
+                </div>
+            </div>
+
+            <!-- TEMPERATUR -->
+            <div class="section-title collapsible" onclick="toggleSection('temperature')">
+                🌡️ Temperatur
+            </div>
+            <div id="temperature" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">Temperatur (°C)</div>
+                    <div id="temperatureGrid"></div>
+                </div>
+            </div>
+
+            <!-- WARNA -->
+            <div class="section-title collapsible" onclick="toggleSection('warna')">
+                🎨 Warna
+            </div>
+            <div id="warna" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">Warna (PtCo) <span class="standard-range">Max: 15 PtCo</span></div>
+                    <div id="warnaGrid"></div>
+                </div>
+            </div>
+
+            <!-- DHL -->
+            <div class="section-title collapsible" onclick="toggleSection('dhl')">
+                ⚡ DHL (Daya Hantar Listrik)
+            </div>
+            <div id="dhl" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">DHL (µS/cm)</div>
+                    <div id="dhlGrid"></div>
+                </div>
+            </div>
+
+            <!-- AMMONIUM -->
+            <div class="section-title collapsible" onclick="toggleSection('ammonium')">
+                🧪 Ammonium
+            </div>
+            <div id="ammonium" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">Ammonium (mg/L) <span class="standard-range">Max: 1.5 mg/L</span></div>
+                    <div id="ammoniumGrid"></div>
+                </div>
+            </div>
+
+            <!-- MANGAN -->
+            <div class="section-title collapsible" onclick="toggleSection('mangan')">
+                ⚙️ Mangan
+            </div>
+            <div id="mangan" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">Mangan (mg/L) <span class="standard-range">Max: 0.5 mg/L</span></div>
+                    <div id="manganGrid"></div>
+                </div>
+            </div>
+
+            <!-- DETERGEN -->
+            <div class="section-title collapsible" onclick="toggleSection('detergen')">
+                🧼 Detergen
+            </div>
+            <div id="detergen" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">Detergen (mg/L) <span class="standard-range">Max: 0.05 mg/L</span></div>
+                    <div id="detergenGrid"></div>
+                </div>
+            </div>
+
+            <!-- DO (Dissolved Oxygen) -->
+            <div class="section-title collapsible" onclick="toggleSection('do')">
+                💨 DO (Dissolved Oxygen)
+            </div>
+            <div id="do" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">DO (mg/L)</div>
+                    <div id="doGrid"></div>
+                </div>
+            </div>
+
+            <!-- BESI -->
+            <div class="section-title collapsible" onclick="toggleSection('besi')">
+                🔩 Besi
+            </div>
+            <div id="besi" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">Besi (mg/L) <span class="standard-range">Max: 1.0 mg/L</span></div>
+                    <div id="besiGrid"></div>
+                </div>
+            </div>
+
+            <!-- ALUMUNIUM -->
+            <div class="section-title collapsible" onclick="toggleSection('alumunium')">
+                🔧 Alumunium
+            </div>
+            <div id="alumunium" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">Alumunium (mg/L) <span class="standard-range">Max: 0.2 mg/L</span></div>
+                    <div id="alumuniumGrid"></div>
+                </div>
+            </div>
+
+            <!-- FREE CHLORINE -->
+            <div class="section-title collapsible" onclick="toggleSection('freeChlorine')">
+                ☣️ Free Chlorine
+            </div>
+            <div id="freeChlorine" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">Free Chlorine (mg/L) <span class="standard-range">0.2 - 0.5 mg/L</span></div>
+                    <div id="freeChlorineGrid"></div>
+                </div>
+            </div>
+
+            <!-- TOTAL CHLORINE -->
+            <div class="section-title collapsible" onclick="toggleSection('totalChlorine')">
+                ☢️ Total Chlorine
+            </div>
+            <div id="totalChlorine" class="collapsible-content">
+                <div class="parameter-group">
+                    <div class="parameter-header">Total Chlorine (mg/L)</div>
+                    <div id="totalChlorineGrid"></div>
+                </div>
+            </div>
+
+            <!-- CATATAN -->
+            <div class="section-title">
+                📝 Catatan
+            </div>
+            <div class="form-group">
+                <textarea id="catatan" rows="4" placeholder="Masukkan catatan tambahan (opsional)"></textarea>
+            </div>
+
+            <div class="loading" id="loadingIndicator">
+                ⏳ Menyimpan data...
+            </div>
+
+            <div class="btn-container">
+                <button class="btn btn-primary" onclick="submitForm()">
+                    💾 Simpan Laporan
+                </button>
+                <button class="btn btn-secondary" onclick="resetForm()">
+                    🔄 Reset Form
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Konfigurasi
+        const WEB_APP_URL = 'YOUR_WEB_APP_URL_HERE'; // Ganti dengan URL Web App Anda
+
+        // Data struktur parameter
+        const parameterData = {
+            kekeruhan: [
+                { name: 'Air Baku', unit: 'NTU', standard: '0.00' },
+                { name: 'Air Setelah Pipa', unit: 'NTU', standard: '0.00' },
+                { name: 'SCADA Air Baku', unit: 'NTU', standard: '0.00' },
+                { name: 'Sedimentasi Pipa 1', unit: 'NTU', standard: '0.00-3.00' },
+                { name: 'Sedimentasi Pipa 2', unit: 'NTU', standard: '0.00-2.00' },
+                { name: 'Sedimentasi Pipa 3', unit: 'NTU', standard: '0.00-4.00' },
+                { name: 'Sedimentasi Pipa 4', unit: 'NTU', standard: '0.00-1.50' },
+                { name: 'Outlet Filter Pipa 1', unit: 'NTU', standard: '0.00-1.50' },
+                { name: 'Outlet Filter Pipa 2', unit: 'NTU', standard: '0.00-1.50' },
+                { name: 'Outlet Filter Pipa 3', unit: 'NTU', standard: '0.00-1.50' },
+                { name: 'Outlet Filter Pipa 4', unit: 'NTU', standard: '0.00-1.50' },
+                { name: 'Reservoir', unit: 'NTU', standard: '0.00-1.50' },
+                { name: 'Distribusi Campuran', unit: 'NTU', standard: '0.00-1.50' },
+                { name: 'SCADA Distribusi', unit: 'NTU', standard: '0.00-1.50' }
+            ],
+            ph: [
+                { name: 'Air Baku', unit: 'pH', standard: '6.00' },
+                { name: 'SCADA Air Baku', unit: 'pH', standard: '4.00-8.00' },
+                { name: 'Sedimentasi Pipa 1', unit: 'pH', standard: '6.50-8.00' },
+                { name: 'Sedimentasi Pipa 2', unit: 'pH', standard: '6.50-8.00' },
+                { name: 'Sedimentasi Pipa 3', unit: 'pH', standard: '6.50-8.00' },
+                { name: 'Sedimentasi Pipa 4', unit: 'pH', standard: '6.50-7.50' },
+                { name: 'Outlet Filter Pipa 1', unit: 'pH', standard: '6.50-7.50' },
+                { name: 'Outlet Filter Pipa 2', unit: 'pH', standard: '6.50-7.50' },
+                { name: 'Outlet Filter Pipa 3', unit: 'pH', standard: '6.50-8.50' },
+                { name: 'Outlet Filter Pipa 4', unit: 'pH', standard: '6.50-8.50' },
+                { name: 'Reservoir', unit: 'pH', standard: '6.50-8.50' },
+                { name: 'Distribusi Campuran', unit: 'pH', standard: '6.50-8.50' },
+                { name: 'SCADA Distribusi', unit: 'pH', standard: '6.50-8.50' }
+            ],
+            temperature: [
+                { name: 'Udara', unit: '°C', standard: '' },
+                { name: 'Distribusi Campuran', unit: '°C', standard: '' },
+                { name: 'Udara', unit: '°C', standard: '' }
+            ],
+            warna: [
+                { name: 'Air Baku', unit: 'PtCo', standard: '0-60' },
+                { name: 'Distribusi Campuran', unit: 'PtCo', standard: '0.00-10.00' }
+            ],
+            dhl: [
+                { name: 'Air Baku', unit: 'µS/cm', standard: '' },
+                { name: 'Distribusi Campuran', unit: 'µS/cm', standard: '' }
+            ],
+            ammonium: [
+                { name: 'Air Baku', unit: 'mg/L', standard: '0.00-1.00' },
+                { name: 'Outlet Aerasi', unit: 'mg/L', standard: '0.00-1.50' },
+                { name: 'Outlet Filter Pipa 1', unit: 'mg/L', standard: '0.00-1.50' },
+                { name: 'Outlet Filter Pipa 2', unit: 'mg/L', standard: '0.00-1.50' },
+                { name: 'Outlet Filter Pipa 3', unit: 'mg/L', standard: '0.00-1.50' },
+                { name: 'Outlet Filter Pipa 4', unit: 'mg/L', standard: '0.00-1.50' },
+                { name: 'Distribusi Campuran', unit: 'mg/L', standard: '0.00-1.50' }
+            ],
+            mangan: [
+                { name: 'Air Baku', unit: 'mg/L', standard: '0.00-0.50' },
+                { name: 'Outlet Aerasi', unit: 'mg/L', standard: '0.00-0.50' },
+                { name: 'Outlet Filter Pipa 1', unit: 'mg/L', standard: '0.00-0.50' },
+                { name: 'Outlet Filter Pipa 2', unit: 'mg/L', standard: '0.00-0.50' },
+                { name: 'Outlet Filter Pipa 3', unit: 'mg/L', standard: '0.00-0.50' },
+                { name: 'Outlet Filter Pipa 4', unit: 'mg/L', standard: '0.00-0.50' },
+                { name: 'Reservoir', unit: 'mg/L', standard: '0.00-0.10' },
+                { name: 'Distribusi Campuran', unit: 'mg/L', standard: '0.00-0.10' }
+            ],
+            detergen: [
+                { name: 'Air Baku', unit: 'mg/L', standard: '0.00-0.10' },
+                { name: 'Air Aerasi', unit: 'mg/L', standard: '0.00-0.10' },
+                { name: 'Distribusi Campuran', unit: 'mg/L', standard: '0.00-0.10' }
+            ],
+            do: [
+                { name: 'Air Baku', unit: 'mg/L', standard: '0.00-5.00' },
+                { name: 'Air Aerasi', unit: 'mg/L', standard: '3.00-7.00' },
+                { name: 'Air Baku', unit: 'mg/L', standard: '0.50-2.00' }
+            ],
+            besi: [
+                { name: 'Air Baku', unit: 'mg/L', standard: '0.00-2.00' },
+                { name: 'Distribusi Campuran', unit: 'mg/L', standard: '0.00-2.00' }
+            ],
+            alumunium: [
+                { name: 'Distribusi Campuran', unit: 'mg/L', standard: '0.00-0.30' },
+                { name: 'Reservoir', unit: 'mg/L', standard: '0.30-0.50' }
+            ],
+            freeChlorine: [
+                { name: 'Distribusi Campuran', unit: 'mg/L', standard: '0.20-0.50' },
+                { name: 'SCADA Distribusi', unit: 'mg/L', standard: '0.30-0.50' }
+            ],
+            totalChlorine: [
+                { name: 'Distribusi Campuran', unit: 'mg/L', standard: '' }
+            ]
+        };
+
+        // Generate grid untuk setiap parameter
+        function generateGrid(containerId, parameters) {
+            const container = document.getElementById(containerId);
+            const selectedTimes = getSelectedTimes();
+            
+            if (selectedTimes.length === 0) {
+                container.innerHTML = '<p style="color: #ff9800; padding: 15px; background: #fff3cd; border-radius: 4px;">⚠️ Silakan pilih waktu pemantauan terlebih dahulu</p>';
+                return;
+            }
+
+            let html = '<div class="time-grid header">';
+            html += '<div>Parameter</div>';
+            html += '<div>Satuan</div>';
+            html += '<div>Standar</div>';
+            selectedTimes.forEach(time => {
+                html += `<div class="time-header">${time}</div>`;
+            });
+            html += '</div>';
+
+            parameters.forEach((param, idx) => {
+                html += '<div class="time-grid">';
+                html += `<div class="param-name">${param.name}</div>`;
+                html += `<div class="param-unit">${param.unit}</div>`;
+                html += `<div class="param-unit">${param.standard}</div>`;
+                selectedTimes.forEach(time => {
+                    html += `<input type="text" class="time-input" data-param="${containerId}" data-name="${param.name}" data-time="${time}" placeholder="-">`;
+                });
+                html += '</div>';
+            });
+
+            container.innerHTML = html;
+        }
+
+        function getSelectedTimes() {
+            const checkboxes = document.querySelectorAll('.time-checkbox:checked');
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+        function selectAllTimes() {
+            document.querySelectorAll('.time-checkbox').forEach(cb => cb.checked = true);
+            regenerateAllGrids();
+        }
+
+        function regenerateAllGrids() {
+            Object.keys(parameterData).forEach(key => {
+                const gridId = key + 'Grid';
+                generateGrid(gridId, parameterData[key]);
+            });
+        }
+
+        // Toggle section collapse
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId);
+            const header = event.currentTarget;
+            
+            content.classList.toggle('collapsed');
+            header.classList.toggle('collapsed');
+        }
+
+        // Submit form
+        async function submitForm() {
+            const selectedTimes = getSelectedTimes();
+            
+            if (selectedTimes.length === 0) {
+                showAlert('error', '⚠️ Silakan pilih minimal 1 waktu pemantauan');
+                return;
+            }
+
+            const formData = {
+                action: 'saveLaboratoriumReport',
+                hari: document.getElementById('hari').value,
+                tanggal: document.getElementById('tanggal').value,
+                petugas: document.getElementById('petugas').value,
+                halaman: document.getElementById('halaman').value,
+                selectedTimes: selectedTimes,
+                catatan: document.getElementById('catatan').value,
+                data: {}
+            };
+
+            if (!formData.hari || !formData.tanggal || !formData.petugas) {
+                showAlert('error', '⚠️ Harap isi semua field yang required (Hari, Tanggal, Petugas)');
+                return;
+            }
+
+            // Collect all input data
+            document.querySelectorAll('.time-input').forEach(input => {
+                const param = input.dataset.param;
+                const name = input.dataset.name;
+                const time = input.dataset.time;
+                const value = input.value;
+
+                if (!formData.data[param]) {
+                    formData.data[param] = {};
+                }
+                if (!formData.data[param][name]) {
+                    formData.data[param][name] = {};
+                }
+                formData.data[param][name][time] = value;
+            });
+
+            // Show loading
+            document.getElementById('loadingIndicator').classList.add('show');
+
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showAlert('success', '✅ ' + result.message);
+                    setTimeout(() => {
+                        if (confirm('Data berhasil disimpan! Reset form?')) {
+                            resetForm();
+                        }
+                    }, 1500);
+                } else {
+                    showAlert('error', '❌ ' + result.message);
+                }
+            } catch (error) {
+                showAlert('error', '❌ Error: ' + error.message);
+            } finally {
+                document.getElementById('loadingIndicator').classList.remove('show');
+            }
+        }
+
+        function showAlert(type, message) {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.className = `alert alert-${type} show`;
+            alertBox.textContent = message;
+            
+            setTimeout(() => {
+                alertBox.classList.remove('show');
+            }, 5000);
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetForm() {
+            if (confirm('Yakin ingin reset semua data?')) {
+                document.querySelectorAll('input[type="text"], input[type="date"], textarea, select').forEach(el => {
+                    if (el.id !== 'halaman') el.value = '';
+                });
+                document.querySelectorAll('.time-checkbox').forEach(cb => cb.checked = false);
+                regenerateAllGrids();
+                showAlert('success', '✅ Form berhasil direset');
+            }
+        }
+
+        // Auto set tanggal hari ini
+        window.onload = function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('tanggal').value = today;
+            
+            // Auto select hari
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            document.getElementById('hari').value = days[new Date().getDay()];
+
+            // Initialize grids
+            regenerateAllGrids();
+        };
+
+        // Listen to time checkbox changes
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('time-checkbox')) {
+                regenerateAllGrids();
+            }
+        });
+    </script>
+</body>
+</html>
