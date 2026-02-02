@@ -1,0 +1,43 @@
+# Configuration with sensitive data
+config.json
+*.config.js
+.env*
+
+# Credentials
+credentials.json
+token.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Test
+coverage/
+*.test.js
+
+# Temp
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Build
+dist/
+build/
+node_modules/
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Private
+NOTES.txt
+TODO.txt
+PRIVATE.md
+test-data/

@@ -1,0 +1,391 @@
+/* ==========================================
+   LABORATORIUM WTP - STYLESHEET
+   PT Jasa Tirta Luhur - WTP Subang Larang
+   ========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+/* ========== HEADER ========== */
+.header {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  color: white;
+  padding: 30px;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.header p {
+  font-size: 14px;
+  opacity: 0.95;
+  font-style: italic;
+}
+
+/* ========== FORM SECTION ========== */
+.form-section {
+  padding: 30px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+/* ========== SECTION TITLE ========== */
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1976d2;
+  margin: 30px 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #1976d2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.section-title.collapsible::before {
+  content: '▼ ';
+  transition: transform 0.3s;
+  display: inline-block;
+}
+
+.section-title.collapsible.collapsed::before {
+  transform: rotate(-90deg);
+}
+
+/* ========== COLLAPSIBLE CONTENT ========== */
+.collapsible-content {
+  max-height: 5000px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.collapsible-content.collapsed {
+  max-height: 0;
+}
+
+/* ========== PARAMETER GROUP ========== */
+.parameter-group {
+  background: #ffffff;
+  border: 2px solid #e3f2fd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.parameter-header {
+  background: #1976d2;
+  color: white;
+  padding: 12px 20px;
+  margin: -20px -20px 20px -20px;
+  border-radius: 6px 6px 0 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* ========== TIME GRID ========== */
+.time-grid {
+  display: grid;
+  grid-template-columns: 200px repeat(auto-fit, minmax(80px, 1fr));
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.time-grid.header {
+  font-weight: 600;
+  background: #e3f2fd;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.param-name {
+  font-weight: 500;
+  color: #333;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.param-unit {
+  color: #666;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.time-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 13px;
+  width: 100%;
+}
+
+.time-input:focus {
+  border-color: #1976d2;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.time-header {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1976d2;
+}
+
+/* ========== STANDARD RANGE ========== */
+.standard-range {
+  display: inline-block;
+  background: #fff3cd;
+  color: #856404;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  margin-left: 10px;
+}
+
+/* ========== BUTTONS ========== */
+.btn-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.btn {
+  padding: 15px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+}
+
+.btn-secondary {
+  background: #fff;
+  color: #1976d2;
+  border: 2px solid #1976d2;
+}
+
+.btn-secondary:hover {
+  background: #1976d2;
+  color: white;
+}
+
+/* ========== LOADING ========== */
+.loading {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  color: #1976d2;
+  font-weight: 600;
+}
+
+.loading.show {
+  display: block;
+}
+
+/* ========== ALERT ========== */
+.alert {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  display: none;
+}
+
+.alert.show {
+  display: block;
+}
+
+.alert-success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .time-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-container {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+
+  body {
+    padding: 10px;
+  }
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+  body {
+    background: white;
+    padding: 0;
+  }
+
+  .btn-container,
+  .loading,
+  .alert {
+    display: none !important;
+  }
+
+  .container {
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
+
+/* ========== TIME SELECTION ========== */
+.time-checkbox {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.time-checkbox:checked {
+  accent-color: #1976d2;
+}
+
+label {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ========== UTILITIES ========== */
+.text-center {
+  text-align: center;
+}
+
+.mt-2 {
+  margin-top: 20px;
+}
+
+.mb-2 {
+  margin-bottom: 20px;
+}
+
+.p-2 {
+  padding: 20px;
+}
+
+.bg-light {
+  background-color: #f8f9fa;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+.text-primary {
+  color: #1976d2;
+}
+
+.text-danger {
+  color: #dc3545;
+}
+
+.text-success {
+  color: #28a745;
+}
